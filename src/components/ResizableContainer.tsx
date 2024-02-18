@@ -13,6 +13,7 @@ const ResizableContainer: React.FC<ResizableContainerProps> = ({
 }) => {
   const [innerHeight, setInnerHeight] = useState(window.innerHeight);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(Math.floor(window.innerWidth * 0.75));
 
   useEffect(() => {
     let timer: any;
@@ -24,6 +25,9 @@ const ResizableContainer: React.FC<ResizableContainerProps> = ({
       timer = setTimeout(() => {
         setInnerHeight(window.innerHeight);
         setInnerWidth(window.innerWidth);
+        if (width > window.innerWidth * 0.75) {
+          setWidth(Math.floor(window.innerWidth * 0.75));
+        }
       }, 100);
     };
 
@@ -40,15 +44,15 @@ const ResizableContainer: React.FC<ResizableContainerProps> = ({
     resizableProps = {
       className: 'resize-horizontal',
       height: Infinity,
-      width: innerWidth * 0.75,
+      width: width,
       resizeHandles: ['e'],
-      minConstraints: [innerWidth * 0.2, Infinity],
-      maxConstraints: [innerWidth * 0.75, Infinity],
+      minConstraints: [Math.floor(innerWidth * 0.2), Infinity],
+      maxConstraints: [Math.floor(innerWidth * 0.75), Infinity],
     };
   } else {
     resizableProps = {
       minConstraints: [Infinity, 48],
-      maxConstraints: [Infinity, innerHeight * 0.9],
+      maxConstraints: [Infinity, Math.floor(innerHeight * 0.9)],
       height: 300,
       width: Infinity,
       resizeHandles: ['s'],

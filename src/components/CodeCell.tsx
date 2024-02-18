@@ -7,11 +7,13 @@ import ResizableContainer from './ResizableContainer';
 const CodeCell = () => {
   const [input, setInput] = useState('');
   const [code, setCode] = useState('');
+  const [err, setErr] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      const code = await bundler(input);
-      setCode(code);
+      const bundle = await bundler(input);
+      setCode(bundle.code);
+      setErr(bundle.err);
     }, 500);
 
     return () => {
@@ -35,7 +37,7 @@ const CodeCell = () => {
           />
         </ResizableContainer>
 
-        <Preview code={code} />
+        <Preview code={code} err={err} />
       </div>
     </ResizableContainer>
   );

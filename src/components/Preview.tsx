@@ -7,13 +7,20 @@ const html = `
   <head></head>
     <div id='root'></div>
     <script>
+      const handleError = (err) => {
+        const root = document.getElementById('root');
+        root.innerHTML = '<div style="color: red"><h4>Error</h4>' + err + '</div>';
+        console.error(err);
+      };
+      window.addEventListener('error', (event) => {
+        event.preventDefault();
+        handleError(event.error);
+      });
       window.addEventListener('message', (event) => {
         try {
           eval(event.data);
         } catch (err) {
-          const root = document.getElementById('root');
-          root.innerHTML = '<div style="color: red"><h4>Error</h4>' + err + '</div>';
-          console.error(err);
+          handleError(err);
         }
       }, false);
     </script>
@@ -22,9 +29,10 @@ const html = `
 
 interface PreviewProps {
   code: string;
+  err: string;
 }
 
-function Preview({ code }: PreviewProps) {
+function Preview({ code, err }: PreviewProps) {
   const iFrame = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -40,6 +48,7 @@ function Preview({ code }: PreviewProps) {
         sandbox='allow-scripts'
         srcDoc={html}
       />
+      {err !== '' && <div>Error: {err}</div>}
     </div>
   );
 }
