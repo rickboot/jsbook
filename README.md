@@ -18,3 +18,4 @@ Todo:
 1. latest esbuild might be able to bundle css into main file so no hack required?
 2. add last browser resize tweak - sync width state between ResizableContainer and ResizableBox
 3. add code execution delay to allow time to update html - #172
+4. update redux to use current best practices - RTK and configureStore vs createStore

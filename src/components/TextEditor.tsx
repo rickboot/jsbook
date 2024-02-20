@@ -28,15 +28,15 @@ const TextEditor: React.FC = () => {
         <MDEditor value={text} onChange={(input) => setText(input ?? '')} />
       </div>
     );
-  }
-
-  return (
-    <div ref={ref} className='text-editor card'>
-      <div className='card-content'>
-        <MDEditor.Markdown source={text} style={{ whiteSpace: 'pre-wrap' }} />
+  } else {
+    return (
+      <div ref={ref} className='text-editor card'>
+        <div className='card-content'>
+          <MDEditor.Markdown source={text} style={{ whiteSpace: 'pre-wrap' }} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default TextEditor;
