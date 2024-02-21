@@ -9,17 +9,19 @@ export const store = createStore(reducers, {}, applyMiddleware(thunk));
 // todo: delete the following dummy data code
 
 store.dispatch({
-  type: ActionType.INSERT_CELL_BEFORE,
+  type: ActionType.INSERT_CELL_AFTER,
   payload: {
     id: null,
     type: 'text',
+    content: 'This is some text',
   },
 });
 
 store.dispatch({
-  type: ActionType.INSERT_CELL_BEFORE,
+  type: ActionType.INSERT_CELL_AFTER,
   payload: {
     id: null,
     type: 'code',
+    content: `document.getElementById('root').innerHTML = 'Hello World!'`,
   },
 });

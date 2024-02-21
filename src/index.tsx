@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import CellList from './components/CellList';
 import { store } from './state';
+import 'bulmaswatch/superhero/bulmaswatch.min.css';
 
 const App = () => {
   return (

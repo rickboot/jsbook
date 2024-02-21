@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import CodeEditor from '../components/CodeEditor';
 import Preview from '../components/Preview';
 import bundler from '../bundler';
-import ResizableContainer from './ResizableContainer';
+import Resizable from './Resizable';
+import { useActions } from '../hooks/use-actions';
 import { Cell } from '../state';
 
 interface CodeCellProps {
@@ -10,24 +11,24 @@ interface CodeCellProps {
 }
 
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
-  const [input, setInput] = useState('');
-  const [code, setCode] = useState(cell.content);
+  const [bundledCode, setBundledCode] = useState('');
   const [err, setErr] = useState('');
+  const { updateCell } = useActions();
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      const bundle = await bundler(input);
-      setCode(bundle.code);
+      const bundle = await bundler(cell.content);
+      setBundledCode(bundle.code);
       setErr(bundle.err);
     }, 500);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [input]);
+  }, [cell.content]);
 
   return (
-    <ResizableContainer direction='vertical'>
+    <Resizable direction='vertical'>
       <div
         style={{
           display: 'flex',
@@ -35,16 +36,16 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
           height: '100%',
         }}
       >
-        <ResizableContainer direction='horizontal'>
+        <Resizable direction='horizontal'>
           <CodeEditor
-            initialValue='let love = true;'
-            onChange={(value: string) => setInput(value)}
+            initialValue={cell.content}
+            onChange={(value: string) => updateCell(cell.id, value)}
           />
-        </ResizableContainer>
+        </Resizable>
 
-        <Preview code={code} err={err} />
+        <Preview code={bundledCode} err={err} />
       </div>
-    </ResizableContainer>
+    </Resizable>
   );
 };
 

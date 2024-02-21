@@ -1,6 +1,6 @@
 import { ResizableBox, ResizableBoxProps } from 'react-resizable';
-import './ResizableContainer.css';
 import { useEffect, useState } from 'react';
+import './Resizable.css';
 
 interface ResizableContainerProps {
   direction: 'horizontal' | 'vertical';
@@ -36,7 +36,7 @@ const ResizableContainer: React.FC<ResizableContainerProps> = ({
     return () => {
       window.removeEventListener('resize', listener);
     };
-  }, []);
+  }, [width]);
 
   let resizableProps: ResizableBoxProps;
 
