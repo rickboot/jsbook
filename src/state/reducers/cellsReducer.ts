@@ -59,11 +59,11 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
       } else {
         state.order.splice(index + 1, 0, cell.id);
       }
-
       return state;
     }
+    default:
+      return state;
   }
-  return state;
 }, initialState);
 
 const randomId = () => {
