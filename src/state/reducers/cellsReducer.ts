@@ -4,12 +4,12 @@ import { Action } from '../actions';
 import { produce } from 'immer';
 
 interface CellsState {
-  loading: boolean;
-  error: string | null;
   order: string[];
   data: {
     [key: string]: Cell;
   };
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: CellsState = {

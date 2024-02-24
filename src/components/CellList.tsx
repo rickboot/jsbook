@@ -3,9 +3,11 @@ import { useTypedSelector } from '../hooks/use-typed-selector';
 import AddCell from './AddCell';
 
 const CellList = () => {
-  const cells = useTypedSelector(({ cells: { order, data } }) => {
-    return order.map((id) => data[id]);
-  });
+  // const cells = useTypedSelector(({ cells: { order, data } }) => {
+  //   return order.map((id) => data[id]);
+  // });
+  const { data, order } = useTypedSelector((state) => state.cells);
+  const cells = order.map((id) => data[id]);
 
   const renderedCells = cells.map((cell) => (
     <div key={cell.id}>
