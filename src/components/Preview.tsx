@@ -36,11 +36,13 @@ function Preview({ code, err }: PreviewProps) {
   const iFrame = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    iFrame.current?.contentWindow?.postMessage(code, '*');
+    setTimeout(() => {
+      iFrame.current?.contentWindow?.postMessage(code, '*');
+    }, 50);
   }, [code]);
 
   return (
-    <div className='preview'>
+    <div className='preview-wrapper'>
       <iframe
         style={{ height: '100%', width: '100%' }}
         title='preview'

@@ -44,6 +44,7 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
             onChange={(value: string) => updateCell(cell.id, value)}
           />
         </Resizable>
+
         <div className='progress-wrapper'>
           {!bundle || bundle.loading ? (
             <div className='progress-bar'>
