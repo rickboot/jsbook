@@ -4,10 +4,10 @@ import { Action } from '../actions';
 import { produce } from 'immer';
 
 interface CellsState {
-  order: string[];
   data: {
     [key: string]: Cell;
   };
+  order: string[];
   loading: boolean;
   error: string | null;
 }

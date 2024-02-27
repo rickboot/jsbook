@@ -1,11 +1,9 @@
 import CellListItem from './CellListItem';
 import { useTypedSelector } from '../hooks/use-typed-selector';
 import AddCell from './AddCell';
+import './CellList.css';
 
 const CellList = () => {
-  // const cells = useTypedSelector(({ cells: { order, data } }) => {
-  //   return order.map((id) => data[id]);
-  // });
   const { data, order } = useTypedSelector((state) => state.cells);
   const cells = order.map((id) => data[id]);
 
@@ -17,10 +15,10 @@ const CellList = () => {
   ));
 
   return (
-    <>
+    <div className='cell-list'>
       <AddCell forceVisible={cells.length === 0} previousCellId={null} />
       {renderedCells}
-    </>
+    </div>
   );
 };
 
