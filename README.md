@@ -2,6 +2,17 @@
 
 ### Based on Stephen Grider's React and TypeScript
 
+#### What it is:
+
+This is a multi-part project server-client application that allows editing, running, and sharing code and text documents via a web browser.
+
+The project components include:
+
+- Web app - allows editing and running of JavaScript and React code and text cells (collectively known as a 'book');
+- CLI - command line utility to launch the local API
+- Local API - serves up local web client as well as loading and saving of files to local computer.
+- Public API (TBD) - serves public web client and allows transfer of code/text books to and from local APIs.
+
 #### Built with:
 
 - React
@@ -13,6 +24,7 @@
 - redux for state management
 - redux-thunk for async action creators
 - custom esbuild plugin - fetches all files for an npm package from unpkg.com (need because by default esbuild will try to import from filesystem (which doesn't exist in browser))
+- Lerna CLI to manage multi-package project
 
 Todo:
 
